@@ -1,0 +1,67 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CafeneauaAfterHours.ViewModels"
+             x:Class="CafeneauaAfterHours.Views.RezervareView"
+             x:DataType="vm:RezervareViewModel">
+
+  <StackPanel Spacing="15" MaxWidth="680" HorizontalAlignment="Center">
+    <TextBlock Classes="h1" Text="Rezervă o masă"/>
+    <TextBlock Classes="lead" Text="Câmpurile marcate cu * sunt obligatorii."/>
+
+    <Border Classes="card">
+      <StackPanel Spacing="14">
+
+        <StackPanel Spacing="6">
+          <TextBlock Text="Nume *" FontWeight="Bold"/>
+          <TextBox Watermark="ex: Ana Popescu" Text="{Binding Nume}"/>
+          <TextBlock Classes="error" Text="{Binding EroareNume}" IsVisible="{Binding EroareNume, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+        </StackPanel>
+
+        <StackPanel Spacing="6">
+          <TextBlock Text="Email *" FontWeight="Bold"/>
+          <TextBox Watermark="ex: ana@email.ro" Text="{Binding Email}"/>
+          <TextBlock Classes="error" Text="{Binding EroareEmail}" IsVisible="{Binding EroareEmail, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+        </StackPanel>
+
+        <StackPanel Spacing="6">
+          <TextBlock Text="Telefon *" FontWeight="Bold"/>
+          <TextBox Watermark="07xxxxxxxx" Text="{Binding Telefon}"/>
+          <TextBlock Classes="error" Text="{Binding EroareTelefon}" IsVisible="{Binding EroareTelefon, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+        </StackPanel>
+
+        <StackPanel Spacing="6">
+          <TextBlock Text="Data *" FontWeight="Bold"/>
+          <CalendarDatePicker SelectedDate="{Binding Data}" HorizontalAlignment="Stretch"/>
+          <TextBlock Classes="error" Text="{Binding EroareData}" IsVisible="{Binding EroareData, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+        </StackPanel>
+
+        <StackPanel Spacing="6">
+          <TextBlock Text="Ora *" FontWeight="Bold"/>
+          <ComboBox ItemsSource="{Binding OreDisponibile}" SelectedItem="{Binding Ora}"
+                    PlaceholderText="Alege ora" HorizontalAlignment="Stretch"/>
+          <TextBlock Classes="error" Text="{Binding EroareOra}" IsVisible="{Binding EroareOra, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+        </StackPanel>
+
+        <StackPanel Spacing="6">
+          <TextBlock Text="Persoane *" FontWeight="Bold"/>
+          <NumericUpDown Value="{Binding Persoane}" Minimum="1" Maximum="20" Increment="1"
+                         FormatString="0" HorizontalAlignment="Stretch"/>
+          <TextBlock Classes="error" Text="{Binding EroarePersoane}" IsVisible="{Binding EroarePersoane, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+        </StackPanel>
+
+        <StackPanel Spacing="6">
+          <TextBlock Text="Observații" FontWeight="Bold"/>
+          <TextBox Watermark="ex: masă lângă geam" Text="{Binding Observatii}"
+                   AcceptsReturn="True" MinHeight="80" TextWrapping="Wrap"/>
+        </StackPanel>
+
+        <Button Classes="main" Content="Trimite rezervarea"
+                Command="{Binding TrimiteCommand}" HorizontalAlignment="Stretch"/>
+
+        <TextBlock Foreground="{DynamicResource GoodBrush}" FontWeight="Bold"
+                   Text="{Binding Rezultat}"
+                   IsVisible="{Binding Rezultat, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+      </StackPanel>
+    </Border>
+  </StackPanel>
+</UserControl>

@@ -1,0 +1,79 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CafeneauaAfterHours.ViewModels"
+             x:Class="CafeneauaAfterHours.Views.ContactView"
+             x:DataType="vm:ContactViewModel">
+
+  <Grid ColumnDefinitions="0.9*,1.1*">
+
+    <StackPanel Grid.Column="0" Spacing="15" Margin="0,0,11,0">
+      <TextBlock Classes="h1" Text="Contact"/>
+      <TextBlock Classes="lead" TextWrapping="Wrap"
+                 Text="Pentru întrebări, evenimente sau feedback, trimite un mesaj."/>
+
+      <Border Classes="card">
+        <StackPanel Spacing="10">
+          <StackPanel>
+            <TextBlock FontWeight="Bold" Text="Adresă:"/>
+            <TextBlock Text="Str. Teilor 14, Timișoara"/>
+          </StackPanel>
+          <StackPanel>
+            <TextBlock FontWeight="Bold" Text="Program:"/>
+            <TextBlock Text="Luni - Duminică, 8:00 - 22:00"/>
+          </StackPanel>
+          <StackPanel>
+            <TextBlock FontWeight="Bold" Text="Telefon:"/>
+            <TextBlock Text="0264 100 200"/>
+          </StackPanel>
+          <StackPanel>
+            <TextBlock FontWeight="Bold" Text="Email:"/>
+            <TextBlock Text="salut@afterhours.ro"/>
+          </StackPanel>
+        </StackPanel>
+      </Border>
+    </StackPanel>
+
+    <Border Grid.Column="1" Classes="card" Margin="11,0,0,0">
+      <StackPanel Spacing="14">
+
+        <StackPanel Spacing="6">
+          <TextBlock Text="Nume *" FontWeight="Bold"/>
+          <TextBox Watermark="Numele tău" Text="{Binding Nume}"/>
+          <TextBlock Classes="error" Text="{Binding EroareNume}"
+                     IsVisible="{Binding EroareNume, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+        </StackPanel>
+
+        <StackPanel Spacing="6">
+          <TextBlock Text="Email *" FontWeight="Bold"/>
+          <TextBox Watermark="email@exemplu.ro" Text="{Binding Email}"/>
+          <TextBlock Classes="error" Text="{Binding EroareEmail}"
+                     IsVisible="{Binding EroareEmail, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+        </StackPanel>
+
+        <StackPanel Spacing="6">
+          <TextBlock Text="Subiect *" FontWeight="Bold"/>
+          <ComboBox ItemsSource="{Binding Subiecte}" SelectedItem="{Binding Subiect}"
+                    PlaceholderText="Alege" HorizontalAlignment="Stretch"/>
+          <TextBlock Classes="error" Text="{Binding EroareSubiect}"
+                     IsVisible="{Binding EroareSubiect, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+        </StackPanel>
+
+        <StackPanel Spacing="6">
+          <TextBlock Text="Mesaj *" FontWeight="Bold"/>
+          <TextBox Watermark="Scrie mesajul aici" Text="{Binding Mesaj}"
+                   AcceptsReturn="True" MinHeight="120" TextWrapping="Wrap"/>
+          <TextBlock Classes="error" Text="{Binding EroareMesaj}"
+                     IsVisible="{Binding EroareMesaj, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+        </StackPanel>
+
+        <Button Classes="main" Content="Trimite mesajul"
+                Command="{Binding TrimiteCommand}" HorizontalAlignment="Stretch"/>
+
+        <TextBlock Foreground="{DynamicResource GoodBrush}" FontWeight="Bold"
+                   Text="{Binding Rezultat}"
+                   IsVisible="{Binding Rezultat, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+      </StackPanel>
+    </Border>
+
+  </Grid>
+</UserControl>

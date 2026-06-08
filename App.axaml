@@ -1,0 +1,203 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="CafeneauaAfterHours.App"
+             RequestedThemeVariant="Light">
+
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.ThemeDictionaries>
+
+        <ResourceDictionary x:Key="Light">
+          <Color x:Key="BgColor">#f8efe4</Color>
+          <Color x:Key="CardColor">#fffaf3</Color>
+          <Color x:Key="TextColor">#34251d</Color>
+          <Color x:Key="MutedColor">#75655b</Color>
+          <Color x:Key="AccentColor">#b76e3f</Color>
+          <Color x:Key="BorderColor">#e2cbb7</Color>
+          <Color x:Key="BadColor">#b00020</Color>
+          <Color x:Key="GoodColor">#26734d</Color>
+
+          <SolidColorBrush x:Key="BgBrush" Color="{StaticResource BgColor}"/>
+          <SolidColorBrush x:Key="CardBrush" Color="{StaticResource CardColor}"/>
+          <SolidColorBrush x:Key="TextBrush" Color="{StaticResource TextColor}"/>
+          <SolidColorBrush x:Key="MutedBrush" Color="{StaticResource MutedColor}"/>
+          <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}"/>
+          <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderColor}"/>
+          <SolidColorBrush x:Key="BadBrush" Color="{StaticResource BadColor}"/>
+          <SolidColorBrush x:Key="GoodBrush" Color="{StaticResource GoodColor}"/>
+        </ResourceDictionary>
+
+        <ResourceDictionary x:Key="Dark">
+          <Color x:Key="BgColor">#211a16</Color>
+          <Color x:Key="CardColor">#302720</Color>
+          <Color x:Key="TextColor">#f5eadf</Color>
+          <Color x:Key="MutedColor">#c7b6a8</Color>
+          <Color x:Key="AccentColor">#e0a06f</Color>
+          <Color x:Key="BorderColor">#59473c</Color>
+          <Color x:Key="BadColor">#ff8a8a</Color>
+          <Color x:Key="GoodColor">#8ad6a6</Color>
+
+          <SolidColorBrush x:Key="BgBrush" Color="{StaticResource BgColor}"/>
+          <SolidColorBrush x:Key="CardBrush" Color="{StaticResource CardColor}"/>
+          <SolidColorBrush x:Key="TextBrush" Color="{StaticResource TextColor}"/>
+          <SolidColorBrush x:Key="MutedBrush" Color="{StaticResource MutedColor}"/>
+          <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}"/>
+          <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderColor}"/>
+          <SolidColorBrush x:Key="BadBrush" Color="{StaticResource BadColor}"/>
+          <SolidColorBrush x:Key="GoodBrush" Color="{StaticResource GoodColor}"/>
+        </ResourceDictionary>
+
+      </ResourceDictionary.ThemeDictionaries>
+
+      <x:Double x:Key="FontSizeNormal">14</x:Double>
+      <x:Double x:Key="FontSizeMare">19</x:Double>
+      <x:Double x:Key="FontSizeH1">42</x:Double>
+      <x:Double x:Key="FontSizeH2">24</x:Double>
+      <x:Double x:Key="FontSizeH3">18</x:Double>
+    </ResourceDictionary>
+  </Application.Resources>
+
+  <Application.Styles>
+    <FluentTheme />
+
+    <Style Selector="Window">
+      <Setter Property="Background" Value="{DynamicResource BgBrush}"/>
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+      <Setter Property="FontFamily" Value="Inter, Arial, sans-serif"/>
+    </Style>
+
+    <Style Selector="Button.normal">
+      <Setter Property="Background" Value="{DynamicResource CardBrush}"/>
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="Padding" Value="16,10"/>
+      <Setter Property="CornerRadius" Value="12"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+      <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+    <Style Selector="Button.normal:pointerover /template/ ContentPresenter">
+      <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+    </Style>
+
+    <Style Selector="Button.main">
+      <Setter Property="Background" Value="{DynamicResource AccentBrush}"/>
+      <Setter Property="Foreground" Value="White"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="Padding" Value="16,10"/>
+      <Setter Property="CornerRadius" Value="12"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+      <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+
+    <Style Selector="Button.nav">
+      <Setter Property="Background" Value="Transparent"/>
+      <Setter Property="Foreground" Value="{DynamicResource MutedBrush}"/>
+      <Setter Property="BorderThickness" Value="0"/>
+      <Setter Property="Padding" Value="12,8"/>
+      <Setter Property="CornerRadius" Value="20"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+      <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+    <Style Selector="Button.nav:pointerover /template/ ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource AccentBrush}"/>
+      <Setter Property="TextElement.Foreground" Value="White"/>
+    </Style>
+    <Style Selector="Button.nav.active">
+      <Setter Property="Background" Value="{DynamicResource AccentBrush}"/>
+      <Setter Property="Foreground" Value="White"/>
+    </Style>
+
+    <Style Selector="Border.card">
+      <Setter Property="Background" Value="{DynamicResource CardBrush}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="CornerRadius" Value="18"/>
+      <Setter Property="Padding" Value="22"/>
+    </Style>
+
+    <Style Selector="TextBlock.h1">
+      <Setter Property="FontSize" Value="{StaticResource FontSizeH1}"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+      <Setter Property="LineHeight" Value="48"/>
+      <Setter Property="Margin" Value="0,10"/>
+    </Style>
+    <Style Selector="TextBlock.h2">
+      <Setter Property="FontSize" Value="{StaticResource FontSizeH2}"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+      <Setter Property="Margin" Value="0,20,0,10"/>
+    </Style>
+    <Style Selector="TextBlock.h3">
+      <Setter Property="FontSize" Value="{StaticResource FontSizeH3}"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+    <Style Selector="TextBlock.lead">
+      <Setter Property="FontSize" Value="16"/>
+      <Setter Property="Foreground" Value="{DynamicResource MutedBrush}"/>
+      <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+    <Style Selector="TextBlock.muted">
+      <Setter Property="Foreground" Value="{DynamicResource MutedBrush}"/>
+    </Style>
+    <Style Selector="TextBlock.error">
+      <Setter Property="Foreground" Value="{DynamicResource BadBrush}"/>
+      <Setter Property="FontSize" Value="12"/>
+    </Style>
+
+    <Style Selector="TextBox, ComboBox, NumericUpDown, CalendarDatePicker">
+      <Setter Property="Background" Value="{DynamicResource BgBrush}"/>
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"/>
+      <Setter Property="CornerRadius" Value="10"/>
+      <Setter Property="Padding" Value="12"/>
+    </Style>
+    <Style Selector="TextBox.invalid, ComboBox.invalid, NumericUpDown.invalid">
+      <Setter Property="BorderBrush" Value="{DynamicResource BadBrush}"/>
+    </Style>
+
+    <Style Selector="Border.menuitem">
+      <Setter Property="Background" Value="{DynamicResource CardBrush}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="CornerRadius" Value="18"/>
+      <Setter Property="Padding" Value="20"/>
+    </Style>
+    <Style Selector="Border.menuitem.popular">
+      <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+      <Setter Property="BorderThickness" Value="3"/>
+    </Style>
+
+    <Style Selector="Border.tag">
+      <Setter Property="Background" Value="{DynamicResource CardBrush}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="CornerRadius" Value="20"/>
+      <Setter Property="Padding" Value="12,8"/>
+      <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+
+    <Style Selector="Border.topbar">
+      <Setter Property="Background" Value="{DynamicResource CardBrush}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"/>
+      <Setter Property="BorderThickness" Value="0,0,0,1"/>
+      <Setter Property="Padding" Value="40,14"/>
+    </Style>
+
+    <Style Selector="Border.logo-icon">
+      <Setter Property="Background" Value="{DynamicResource AccentBrush}"/>
+      <Setter Property="CornerRadius" Value="10"/>
+      <Setter Property="Padding" Value="8"/>
+    </Style>
+
+    <Style Selector="Border.toast">
+      <Setter Property="Background" Value="{DynamicResource TextBrush}"/>
+      <Setter Property="CornerRadius" Value="20"/>
+      <Setter Property="Padding" Value="18,12"/>
+      <Setter Property="HorizontalAlignment" Value="Center"/>
+      <Setter Property="VerticalAlignment" Value="Bottom"/>
+      <Setter Property="Margin" Value="0,0,0,20"/>
+    </Style>
+
+  </Application.Styles>
+</Application>

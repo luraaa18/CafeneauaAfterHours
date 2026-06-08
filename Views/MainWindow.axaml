@@ -1,0 +1,156 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:CafeneauaAfterHours.ViewModels"
+        xmlns:views="using:CafeneauaAfterHours.Views"
+        xmlns:conv="using:CafeneauaAfterHours.Converters"
+        mc:Ignorable="d" d:DesignWidth="1100" d:DesignHeight="700"
+        x:Class="CafeneauaAfterHours.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Title="Cafeneaua After Hours"
+        Width="1100" Height="750"
+        MinWidth="380" MinHeight="500"
+        Background="{DynamicResource BgBrush}"
+        FontSize="{Binding BaseFontSize}">
+
+  <Window.Resources>
+    <conv:StringEqualsConverter x:Key="StringEqualsConverter"/>
+  </Window.Resources>
+
+  <Window.DataTemplates>
+    <DataTemplate DataType="vm:AcasaViewModel"><views:AcasaView/></DataTemplate>
+    <DataTemplate DataType="vm:MeniuViewModel"><views:MeniuView/></DataTemplate>
+    <DataTemplate DataType="vm:RezervareViewModel"><views:RezervareView/></DataTemplate>
+    <DataTemplate DataType="vm:DespreViewModel"><views:DespreView/></DataTemplate>
+    <DataTemplate DataType="vm:ContactViewModel"><views:ContactView/></DataTemplate>
+  </Window.DataTemplates>
+
+  <Grid>
+    <DockPanel>
+
+      <Border Classes="topbar" DockPanel.Dock="Top">
+        <Grid ColumnDefinitions="Auto,*,Auto">
+
+          <Button Grid.Column="0" Classes="nav" Command="{Binding NavigateToCommand}" CommandParameter="acasa"
+                  Padding="0" Background="Transparent" BorderThickness="0">
+            <StackPanel Orientation="Horizontal" Spacing="6">
+              <Border Classes="logo-icon">
+                <TextBlock Text="☕" FontSize="14" Foreground="White"/>
+              </Border>
+              <TextBlock Text="After Hours" FontSize="18" FontWeight="Bold"
+                         Foreground="{DynamicResource TextBrush}" VerticalAlignment="Center"/>
+            </StackPanel>
+          </Button>
+
+          <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="4"
+                      HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Classes="nav"
+                    Classes.active="{Binding ActivePage, Converter={StaticResource StringEqualsConverter}, ConverterParameter=acasa}"
+                    Command="{Binding NavigateToCommand}" CommandParameter="acasa" Content="Acasă"/>
+            <Button Classes="nav"
+                    Classes.active="{Binding ActivePage, Converter={StaticResource StringEqualsConverter}, ConverterParameter=meniu}"
+                    Command="{Binding NavigateToCommand}" CommandParameter="meniu" Content="Meniu"/>
+            <Button Classes="nav"
+                    Classes.active="{Binding ActivePage, Converter={StaticResource StringEqualsConverter}, ConverterParameter=rezervare}"
+                    Command="{Binding NavigateToCommand}" CommandParameter="rezervare" Content="Rezervare"/>
+            <Button Classes="nav"
+                    Classes.active="{Binding ActivePage, Converter={StaticResource StringEqualsConverter}, ConverterParameter=despre}"
+                    Command="{Binding NavigateToCommand}" CommandParameter="despre" Content="Despre"/>
+            <Button Classes="nav"
+                    Classes.active="{Binding ActivePage, Converter={StaticResource StringEqualsConverter}, ConverterParameter=contact}"
+                    Command="{Binding NavigateToCommand}" CommandParameter="contact" Content="Contact"/>
+          </StackPanel>
+
+          <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+            <Button Classes="normal" Content="Ajutor" Command="{Binding OpenHelpCommand}"/>
+            <Button Classes="normal" Content="Setări" Command="{Binding OpenSettingsCommand}"/>
+          </StackPanel>
+        </Grid>
+      </Border>
+
+      <Border DockPanel.Dock="Bottom" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,1,0,0"
+              Padding="25">
+        <StackPanel HorizontalAlignment="Center" Spacing="2">
+          <TextBlock Text="© 2026 Cafeneaua After Hours" Classes="muted" HorizontalAlignment="Center"/>
+          <TextBlock Text="Aplicație făcută pentru proiect UI/UX." Classes="muted" HorizontalAlignment="Center"/>
+          <TextBlock Text="Matei Laura-Jennifer - Informatică anul 2" Classes="muted" HorizontalAlignment="Center"/>
+        </StackPanel>
+      </Border>
+
+      <ScrollViewer>
+        <ContentControl Content="{Binding CurrentPage}" Margin="22,35" MaxWidth="1100" HorizontalAlignment="Stretch"/>
+      </ScrollViewer>
+
+    </DockPanel>
+
+    <Border Background="#59000000" ZIndex="20"
+            IsVisible="{Binding IsSettingsOpen}"
+            Tapped="OnOverlayTapped"/>
+    <Border Background="#59000000" ZIndex="20"
+            IsVisible="{Binding IsHelpOpen}"
+            Tapped="OnOverlayTapped"/>
+
+    <Border ZIndex="30" HorizontalAlignment="Right" VerticalAlignment="Stretch"
+            Width="340" Background="{DynamicResource CardBrush}"
+            BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1,0,0,0"
+            Padding="25"
+            IsVisible="{Binding IsSettingsOpen}">
+      <ScrollViewer>
+        <StackPanel Spacing="10">
+          <Button Classes="normal" Content="✕" HorizontalAlignment="Right"
+                  Command="{Binding ClosePanelsCommand}"/>
+          <TextBlock Classes="h2" Text="Setări aspect"/>
+          <TextBlock Classes="muted" Text="Alege cum vrei să arate aplicația." TextWrapping="Wrap"/>
+          <Button Classes="normal" HorizontalAlignment="Stretch" Content="Light mode"
+                  Command="{Binding SetThemeCommand}" CommandParameter="light"/>
+          <Button Classes="normal" HorizontalAlignment="Stretch" Content="Dark mode"
+                  Command="{Binding SetThemeCommand}" CommandParameter="dark"/>
+          <Button Classes="normal" HorizontalAlignment="Stretch" Content="Text normal"
+                  Command="{Binding SetSizeCommand}" CommandParameter="normal"/>
+          <Button Classes="normal" HorizontalAlignment="Stretch" Content="Text mare"
+                  Command="{Binding SetSizeCommand}" CommandParameter="mare"/>
+        </StackPanel>
+      </ScrollViewer>
+    </Border>
+
+    <Border ZIndex="30" HorizontalAlignment="Right" VerticalAlignment="Stretch"
+            Width="340" Background="{DynamicResource CardBrush}"
+            BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1,0,0,0"
+            Padding="25"
+            IsVisible="{Binding IsHelpOpen}">
+      <ScrollViewer>
+        <StackPanel Spacing="14">
+          <Button Classes="normal" Content="✕" HorizontalAlignment="Right"
+                  Command="{Binding ClosePanelsCommand}"/>
+          <TextBlock Classes="h2" Text="Ajutor"/>
+
+          <StackPanel Spacing="4">
+            <TextBlock Text="Cum fac o rezervare?" FontWeight="Bold"/>
+            <TextBlock TextWrapping="Wrap" Text="Completează formularul din pagina Rezervare."/>
+          </StackPanel>
+
+          <StackPanel Spacing="4">
+            <TextBlock Text="Care este programul cafenelei?" FontWeight="Bold"/>
+            <TextBlock TextWrapping="Wrap" Text="Suntem deschiși zilnic între 08:00 și 22:00."/>
+          </StackPanel>
+
+          <StackPanel Spacing="4">
+            <TextBlock Text="Pot modifica aspectul aplicației?" FontWeight="Bold"/>
+            <TextBlock TextWrapping="Wrap" Text="Da, poți schimba tema și mărimea textului din butonul Setări."/>
+          </StackPanel>
+
+          <StackPanel Spacing="4">
+            <TextBlock Text="Unde găsesc datele de contact?" FontWeight="Bold"/>
+            <TextBlock TextWrapping="Wrap" Text="În pagina Contact."/>
+          </StackPanel>
+        </StackPanel>
+      </ScrollViewer>
+    </Border>
+
+    <Border Name="ToastBorder" Classes="toast" ZIndex="40" IsVisible="False">
+      <TextBlock Name="ToastText" Foreground="{DynamicResource BgBrush}" FontWeight="Bold"/>
+    </Border>
+
+  </Grid>
+</Window>
