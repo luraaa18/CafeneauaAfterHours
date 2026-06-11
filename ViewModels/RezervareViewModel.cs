@@ -11,7 +11,7 @@ public partial class RezervareViewModel : ViewModelBase
     [ObservableProperty] private string _nume = "";
     [ObservableProperty] private string _email = "";
     [ObservableProperty] private string _telefon = "";
-    [ObservableProperty] private DateTimeOffset? _data;
+    [ObservableProperty] private DateTime? _data;
     [ObservableProperty] private string _ora = "";
     [ObservableProperty] private int _persoane = 2;
     [ObservableProperty] private string _observatii = "";
@@ -52,7 +52,7 @@ public partial class RezervareViewModel : ViewModelBase
         else EroareTelefon = "";
 
         if (Data is null) { EroareData = "Câmp obligatoriu"; ok = false; }
-        else if (Data.Value.Date < DateTime.Today)
+        else if (Data.Value < DateTime.Today)
         { EroareData = "Alege o dată din viitor"; ok = false; }
         else EroareData = "";
 
